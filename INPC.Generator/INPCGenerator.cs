@@ -14,62 +14,62 @@ namespace INPC.Generator
             var _generatedPropertyAttributeSymbol =
                 context.Compilation.GetTypeByMetadataName("INPC.GeneratedPropertyAttribute");
 
-            if(_generatedPropertyAttributeSymbol != null)
+            if (_generatedPropertyAttributeSymbol != null)
             {
-// Search in all types defined in the current compilation (not in the dependents)
-var query = from typeSymbol in context.Compilation.SourceModule.GlobalNamespace.GetNamespaceTypes()
-            from property in typeSymbol.GetFields()
-                            
-            // Find the attribute on the field
-            let info = property.FindAttributeFlattened(_generatedPropertyAttributeSymbol)
-            where info != null
+                // Search in all types defined in the current compilation (not in the dependents)
+                var query = from typeSymbol in context.Compilation.SourceModule.GlobalNamespace.GetNamespaceTypes()
+                            from property in typeSymbol.GetFields()
 
-            // Group properties by type
-            group property by typeSymbol into g
-            select g;
+                                // Find the attribute on the field
+                            let info = property.FindAttributeFlattened(_generatedPropertyAttributeSymbol)
+                            where info != null
 
-foreach(var type in query)
-{
-  // Let's generate the needed class
-  var builder = new IndentedStringBuilder();
+                            // Group properties by type
+                            group property by typeSymbol into g
+                            select g;
 
-  builder.AppendLineInvariant("using System;");
-  builder.AppendLineInvariant("using System.ComponentModel;");
+                foreach (var type in query)
+                {
+                    // Let's generate the needed class
+                    var builder = new IndentedStringBuilder();
 
-  using (builder.BlockInvariant($"namespace {type.Key.ContainingNamespace}"))
-  {
-    using(builder.BlockInvariant($"partial class {type.Key.Name} : INotifyPropertyChanged"))
-    {
-      builder.AppendLineInvariant($"public event PropertyChangedEventHandler PropertyChanged;");
+                    builder.AppendLineInvariant("using System;");
+                    builder.AppendLineInvariant("using System.ComponentModel;");
 
-      foreach(var fieldInfo in type)
-      {
-        var propertyName = fieldInfo.Name.TrimStart('_');
+                    using (builder.BlockInvariant($"namespace {type.Key.ContainingNamespace}"))
+                    {
+                        using (builder.BlockInvariant($"partial class {type.Key.Name} : INotifyPropertyChanged"))
+                        {
+                            builder.AppendLineInvariant($"public event PropertyChangedEventHandler PropertyChanged;");
 
-        // Uppercase name for camel case
-        propertyName = propertyName[0].ToString().ToUpperInvariant() + propertyName.Substring(1);
+                            foreach (var fieldInfo in type)
+                            {
+                                var propertyName = fieldInfo.Name.TrimStart('_');
 
-        using (builder.BlockInvariant($"public {fieldInfo.Type} {propertyName}"))
-        {
-          builder.AppendLineInvariant($"get => {fieldInfo.Name};");
+                                // Uppercase name for camel case
+                                propertyName = propertyName[0].ToString().ToUpperInvariant() + propertyName.Substring(1);
 
-          using (builder.BlockInvariant($"set"))
-          {
-            builder.AppendLineInvariant($"var previous = {fieldInfo.Name};");
-            builder.AppendLineInvariant($"{fieldInfo.Name} = value;");
-            builder.AppendLineInvariant($"PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof({propertyName})));");
-            builder.AppendLineInvariant($"On{propertyName}Changed(previous, value);");
-          }
-        }
+                                using (builder.BlockInvariant($"public {fieldInfo.Type} {propertyName}"))
+                                {
+                                    builder.AppendLineInvariant($"get => {fieldInfo.Name};");
 
-        builder.AppendLineInvariant($"partial void On{propertyName}Changed({fieldInfo.Type} previous, {fieldInfo.Type} value);");
-      }
-    }
-  }
+                                    using (builder.BlockInvariant($"set"))
+                                    {
+                                        builder.AppendLineInvariant($"var previous = {fieldInfo.Name};");
+                                        builder.AppendLineInvariant($"{fieldInfo.Name} = value;");
+                                        builder.AppendLineInvariant($"PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof({propertyName})));");
+                                        builder.AppendLineInvariant($"On{propertyName}Changed(previous, value);");
+                                    }
+                                }
 
-  var sanitizedName = type.Key.ToDisplayString().Replace(".", "_").Replace("+", "_");
-  context.AddCompilationUnit(sanitizedName, builder.ToString());
-}
+                                builder.AppendLineInvariant($"partial void On{propertyName}Changed({fieldInfo.Type} previous, {fieldInfo.Type} value);");
+                            }
+                        }
+                    }
+
+                    var sanitizedName = type.Key.ToDisplayString().Replace(".", "_").Replace("+", "_");
+                    context.AddCompilationUnit(sanitizedName, builder.ToString());
+                }
             }
         }
     }
