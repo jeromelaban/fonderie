@@ -1,12 +1,12 @@
 ﻿<Project>
   <ItemGroup>
-    <SourceGenerator Include="$(MSBuildThisFileDirectory)..\bin\$(Configuration)\netstandard2.0\INPC.Generator.dll"
-            Condition="Exists('$(MSBuildThisFileDirectory)..\bin')" />
-    <SourceGenerator Include="$(MSBuildThisFileDirectory)..\tools\INPC.Generator.dll"
-            Condition="Exists('$(MSBuildThisFileDirectory)..\tools')" />
+    <Analyzer Include="$(MSBuildThisFileDirectory)..\bin\$(Configuration)\netstandard2.0\INPC.Generator.dll"
+              Condition="Exists('$(MSBuildThisFileDirectory)..\bin')" />
+		<Analyzer Include="$(MSBuildThisFileDirectory)..\tools\INPC.Generator.dll"
+              Condition="Exists('$(MSBuildThisFileDirectory)..\tools')" />
   </ItemGroup>
   
   <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\bin')">
     <UpToDateCheck Include="**\*.cs" Exclude="bin\**\*.cs;obj\**\*.cs" />
-  </ItemGroup>
+  </ItemGroup> 
 </Project>

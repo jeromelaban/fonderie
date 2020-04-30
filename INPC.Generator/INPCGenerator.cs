@@ -1,14 +1,21 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Linq;
+using System.Text;
 using Uno.RoslynHelpers;
-using Uno.SourceGeneration;
 
 namespace INPC.Generator
 {
-    public class INPCGenerator : SourceGenerator
+    [Generator]
+    public class MySourceGenerator : ISourceGenerator
     {
-        public override void Execute(SourceGeneratorContext context)
+        public void Initialize(InitializationContext context)
+        {
+            // No initialization required for this one
+        }
+
+        public void Execute(SourceGeneratorContext context)
         {
             // Search for the GeneratedPropertyAttribute symbol
             var _generatedPropertyAttributeSymbol =
@@ -68,7 +75,7 @@ namespace INPC.Generator
                     }
 
                     var sanitizedName = type.Key.ToDisplayString().Replace(".", "_").Replace("+", "_");
-                    context.AddCompilationUnit(sanitizedName, builder.ToString());
+                    context.AddSource(sanitizedName, SourceText.From(builder.ToString(), Encoding.UTF8));
                 }
             }
         }
