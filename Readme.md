@@ -46,3 +46,5 @@ The `INotifyPropertyChanged` interface is automatically implemented, and `XXProp
 ## Fonderie.Resw.Generator
 
 This generator is a sample to demonstrate the ability for Roslyn generators to use MSBuild properties and items.
+
+Find out more in [the article describing this sample](https://jaylee.org/archive/2020/09/13/msbuild-items-and-properties-in-csharp9-sourcegenerators.html).
