@@ -1,4 +1,4 @@
-﻿using INPC;
+﻿using Fonderie;
 using System;
 
 namespace TestApp
@@ -32,7 +32,7 @@ namespace TestApp
 
 }
 
-namespace INPC
+namespace Fonderie
 {
     public class GeneratedPropertyAttribute : Attribute { }
 }

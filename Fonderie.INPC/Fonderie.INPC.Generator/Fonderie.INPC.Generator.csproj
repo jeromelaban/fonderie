@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+		<Authors>jlaban2</Authors>
+		<PackageProjectUrl>https://github.com/jeromelaban/fonderie</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/jeromelaban/fonderie</RepositoryUrl>
+		<Description>This package provides a Roslyn source generator to create INotifyPropertyChanged implementations automatically</Description>
+		<Copyright>Copyright (C) 2020 Jerome Laban</Copyright>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<RestoreAdditionalProjectSources>https://dotnet.myget.org/F/roslyn/api/v3/index.json ;$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-2.final" PrivateAssets="all" />
+		<PackageReference Include="Uno.Roslyn" Version="1.2.0-dev.18" PrivateAssets="all" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<!-- Package the props file -->
+		<None Include="build\Fonderie.INPC.Generator.props" Pack="true" PackagePath="build" Visible="false" />
+	</ItemGroup>
+	
+</Project>

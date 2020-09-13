@@ -1,0 +1,23 @@
+﻿<Project>
+  <ItemGroup>
+    <Analyzer Include="$(MSBuildThisFileDirectory)..\bin\$(Configuration)\netstandard2.0\Fonderie.Resw.Generator.dll"
+              Condition="Exists('$(MSBuildThisFileDirectory)..\bin')" />
+		<Analyzer Include="$(MSBuildThisFileDirectory)..\tools\Fonderie.Resw.Generator.dll"
+              Condition="Exists('$(MSBuildThisFileDirectory)..\tools')" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\bin')">
+    <UpToDateCheck Include="**\*.cs" Exclude="bin\**\*.cs;obj\**\*.cs" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<CompilerVisibleProperty Include="RootNamespace" />
+		<CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemGroup" />
+	</ItemGroup>
+	
+	<Target Name="_InjectAdditionalFiles" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun">
+		<ItemGroup>
+			<AdditionalFiles Include="@(PRIResource)" SourceItemGroup="PRIResource" />
+		</ItemGroup>
+	</Target>
+</Project>

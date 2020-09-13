@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30428.66
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{2EE82463-5902-4FE3-A9F7-CFE83BC37008}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonderie.Resw.Generator", "Fonderie.Resw.Generator\Fonderie.Resw.Generator.csproj", "{47669483-9522-4782-ABEC-07D6CE8FF051}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EE82463-5902-4FE3-A9F7-CFE83BC37008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE82463-5902-4FE3-A9F7-CFE83BC37008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE82463-5902-4FE3-A9F7-CFE83BC37008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE82463-5902-4FE3-A9F7-CFE83BC37008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47669483-9522-4782-ABEC-07D6CE8FF051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47669483-9522-4782-ABEC-07D6CE8FF051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47669483-9522-4782-ABEC-07D6CE8FF051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47669483-9522-4782-ABEC-07D6CE8FF051}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE36D4A1-4037-409D-92FF-F143FFCAF6F9}
+	EndGlobalSection
+EndGlobal
