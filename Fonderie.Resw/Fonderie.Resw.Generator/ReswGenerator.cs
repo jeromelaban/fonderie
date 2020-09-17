@@ -12,13 +12,13 @@ namespace INPC.Generator
 	[Generator]
     public class ReswConstantsGenerator : ISourceGenerator
     {
-        public void Initialize(InitializationContext context)
+        public void Initialize(GeneratorInitializationContext context)
         {
             // Debugger.Launch();
             // No initialization required for this one
         }
 
-        public void Execute(SourceGeneratorContext context)
+        public void Execute(GeneratorExecutionContext context)
         {
             var resources = context.GetMSBuildItems("PRIResource");
 
