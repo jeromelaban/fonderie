@@ -12,12 +12,12 @@ namespace INPC.Generator
 	[Generator]
 	public class INPCGenerator : ISourceGenerator
 	{
-		public void Initialize(InitializationContext context)
+		public void Initialize(GeneratorInitializationContext context)
 		{
 			// No initialization required for this one
 		}
 
-		public void Execute(SourceGeneratorContext context)
+		public void Execute(GeneratorExecutionContext context)
 		{
 			// Search for the GeneratedPropertyAttribute symbol
 			var _generatedPropertyAttributeSymbol =

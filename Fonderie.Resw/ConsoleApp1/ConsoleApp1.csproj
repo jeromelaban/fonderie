@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net5</TargetFramework>
+		<LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,4 +11,14 @@
   </ItemGroup>
 
 	<Import Project="..\Fonderie.Resw.Generator\build\Fonderie.Resw.Generator.props" />
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Fonderie.Resw.Generator\Fonderie.Resw.Generator.csproj">
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+			<SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+			<UndefineProperties>TargetFramework</UndefineProperties>
+		</ProjectReference>
+	</ItemGroup>
+
 </Project>
