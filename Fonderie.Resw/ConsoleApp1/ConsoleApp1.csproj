@@ -10,4 +10,14 @@
   </ItemGroup>
 
 	<Import Project="..\Fonderie.Resw.Generator\build\Fonderie.Resw.Generator.props" />
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Fonderie.Resw.Generator\Fonderie.Resw.Generator.csproj">
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+			<SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+			<UndefineProperties>TargetFramework</UndefineProperties>
+		</ProjectReference>
+	</ItemGroup>
+
 </Project>

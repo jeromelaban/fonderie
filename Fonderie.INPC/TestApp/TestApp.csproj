@@ -7,4 +7,13 @@
 	</PropertyGroup>
 
   <Import Project="..\Fonderie.INPC.Generator\build\Fonderie.INPC.Generator.props" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\Fonderie.INPC.Generator\Fonderie.INPC.Generator.csproj">
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+			<SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+			<UndefineProperties>TargetFramework</UndefineProperties>
+		</ProjectReference>
+	</ItemGroup>
+
 </Project>
