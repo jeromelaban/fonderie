@@ -6,7 +6,7 @@ namespace ConsoleApp1
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine(PriResources.String1);
+			Console.WriteLine(PriResources.String1); 
 		}
 	}
-}
+} 

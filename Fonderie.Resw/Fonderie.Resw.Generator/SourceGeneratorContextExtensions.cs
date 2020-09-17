@@ -8,7 +8,7 @@ namespace INPC.Generator
         private const string SourceItemGroupMetadata = "build_metadata.AdditionalFiles.SourceItemGroup";
 
 		public static string GetMSBuildProperty(
-            this SourceGeneratorContext context,
+            this GeneratorExecutionContext context,
 			string name,
 			string defaultValue = "")
 		{
@@ -16,7 +16,7 @@ namespace INPC.Generator
             return value ?? defaultValue;
 		}
 
-		public static string[] GetMSBuildItems(this SourceGeneratorContext context, string name)
+		public static string[] GetMSBuildItems(this GeneratorExecutionContext context, string name)
             => context
                 .AdditionalFiles
                 .Where(f => context.AnalyzerConfigOptions
